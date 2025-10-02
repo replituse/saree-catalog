@@ -8,31 +8,23 @@ export default function AnimatedBorder({ borderNumber }: AnimatedBorderProps) {
 
   return (
     <div className="w-full overflow-hidden py-0 my-0" data-testid={`animated-border-${borderNumber}`}>
-      <div className="animate-scroll-horizontal flex gap-0" style={{ width: 'fit-content' }}>
-        <img
-          src={borderSrc}
-          alt="Decorative border"
-          className="h-8 sm:h-12 md:h-16 block"
-          style={{ width: 'auto', display: 'block', margin: 0, padding: 0 }}
-        />
-        <img
-          src={borderSrc}
-          alt="Decorative border"
-          className="h-8 sm:h-12 md:h-16 block"
-          style={{ width: 'auto', display: 'block', margin: 0, padding: 0 }}
-        />
-        <img
-          src={borderSrc}
-          alt="Decorative border"
-          className="h-8 sm:h-12 md:h-16 block"
-          style={{ width: 'auto', display: 'block', margin: 0, padding: 0 }}
-        />
-        <img
-          src={borderSrc}
-          alt="Decorative border"
-          className="h-8 sm:h-12 md:h-16 block"
-          style={{ width: 'auto', display: 'block', margin: 0, padding: 0 }}
-        />
+      <div className="animate-scroll-horizontal" style={{ width: 'fit-content', display: 'flex' }}>
+        {Array.from({ length: 20 }).map((_, i) => (
+          <img
+            key={i}
+            src={borderSrc}
+            alt="Decorative border"
+            className="h-8 sm:h-12 md:h-16"
+            style={{ 
+              width: 'auto', 
+              display: 'block', 
+              margin: 0, 
+              padding: 0,
+              verticalAlign: 'top',
+              lineHeight: 0
+            }}
+          />
+        ))}
       </div>
       
       <style>{`
@@ -46,13 +38,15 @@ export default function AnimatedBorder({ borderNumber }: AnimatedBorderProps) {
         }
         
         .animate-scroll-horizontal {
-          animation: scroll-horizontal 30s linear infinite;
+          animation: scroll-horizontal 8s linear infinite;
           display: flex;
           gap: 0;
+          line-height: 0;
         }
         
         .animate-scroll-horizontal img {
           vertical-align: top;
+          line-height: 0;
         }
       `}</style>
     </div>
