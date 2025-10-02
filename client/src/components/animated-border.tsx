@@ -9,42 +9,52 @@ export default function AnimatedBorder({ borderNumber }: AnimatedBorderProps) {
 
   return (
     <div
-      className="w-full overflow-hidden"
+      className="w-full overflow-hidden relative"
       data-testid={`animated-border-${borderNumber}`}
       style={{ 
         fontSize: 0, 
         lineHeight: 0,
-        height: '2rem',
-        position: 'relative'
+        height: '2rem'
       }}
     >
       <div
-        className="animate-scroll-horizontal"
+        className="animate-scroll-horizontal absolute top-0 left-0"
         style={{ 
-          width: "fit-content", 
           display: "flex",
-          position: 'absolute',
-          top: 0,
-          left: 0
+          whiteSpace: 'nowrap'
         }}
       >
-        {Array.from({ length: 50 }).map((_, i) => (
-          <img
+        {Array.from({ length: 100 }).map((_, i) => (
+          <div
             key={i}
-            src={borderSrc}
-            alt=""
-            className="border-image"
             style={{
               height: "2rem",
               width: "auto",
-              display: "block",
-              margin: "0 -8px",
+              display: "inline-block",
+              margin: 0,
               padding: 0,
-              verticalAlign: "top",
-              lineHeight: 0,
-              flexShrink: 0
+              position: 'relative',
+              overflow: 'hidden'
             }}
-          />
+          >
+            <img
+              src={borderSrc}
+              alt=""
+              className="border-image"
+              style={{
+                height: "2rem",
+                width: "auto",
+                display: "block",
+                margin: 0,
+                padding: 0,
+                clipPath: "inset(0 6% 0 6%)",
+                transform: "scaleX(1.15)",
+                transformOrigin: "center",
+                verticalAlign: "top",
+                lineHeight: 0
+              }}
+            />
+          </div>
         ))}
       </div>
 
@@ -59,9 +69,7 @@ export default function AnimatedBorder({ borderNumber }: AnimatedBorderProps) {
         }
         
         .animate-scroll-horizontal {
-          animation: scroll-horizontal 15s linear infinite;
-          display: flex;
-          gap: 0;
+          animation: scroll-horizontal 20s linear infinite;
           line-height: 0;
           font-size: 0;
         }
@@ -77,13 +85,13 @@ export default function AnimatedBorder({ borderNumber }: AnimatedBorderProps) {
         
         @media (min-width: 640px) {
           .border-image {
-            height: 3rem;
+            height: 3rem !important;
           }
         }
         
         @media (min-width: 768px) {
           .border-image {
-            height: 4rem;
+            height: 4rem !important;
           }
         }
       `}</style>
