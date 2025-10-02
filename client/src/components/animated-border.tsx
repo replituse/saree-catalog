@@ -9,28 +9,40 @@ export default function AnimatedBorder({ borderNumber }: AnimatedBorderProps) {
 
   return (
     <div
-      className="w-full overflow-hidden py-0 my-0"
+      className="w-full overflow-hidden"
       data-testid={`animated-border-${borderNumber}`}
-      style={{ fontSize: 0, lineHeight: 0 }}
+      style={{ 
+        fontSize: 0, 
+        lineHeight: 0,
+        height: '2rem',
+        position: 'relative'
+      }}
     >
       <div
         className="animate-scroll-horizontal"
-        style={{ width: "fit-content", display: "flex" }}
+        style={{ 
+          width: "fit-content", 
+          display: "flex",
+          position: 'absolute',
+          top: 0,
+          left: 0
+        }}
       >
-        {Array.from({ length: 30 }).map((_, i) => (
+        {Array.from({ length: 50 }).map((_, i) => (
           <img
             key={i}
             src={borderSrc}
-            alt="Decorative border"
-            className="border-image h-8 sm:h-12 md:h-16"
+            alt=""
+            className="border-image"
             style={{
+              height: "2rem",
               width: "auto",
               display: "block",
-              margin: "0 -2px",
+              margin: "0 -8px",
               padding: 0,
               verticalAlign: "top",
               lineHeight: 0,
-              transform: "scaleX(1.02)",
+              flexShrink: 0
             }}
           />
         ))}
@@ -47,7 +59,7 @@ export default function AnimatedBorder({ borderNumber }: AnimatedBorderProps) {
         }
         
         .animate-scroll-horizontal {
-          animation: scroll-horizontal 10s linear infinite;
+          animation: scroll-horizontal 15s linear infinite;
           display: flex;
           gap: 0;
           line-height: 0;
@@ -59,6 +71,20 @@ export default function AnimatedBorder({ borderNumber }: AnimatedBorderProps) {
           line-height: 0;
           image-rendering: -webkit-optimize-contrast;
           image-rendering: crisp-edges;
+          pointer-events: none;
+          user-select: none;
+        }
+        
+        @media (min-width: 640px) {
+          .border-image {
+            height: 3rem;
+          }
+        }
+        
+        @media (min-width: 768px) {
+          .border-image {
+            height: 4rem;
+          }
         }
       `}</style>
     </div>
