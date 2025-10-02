@@ -129,7 +129,7 @@ export default function Carousel() {
 
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % bannerImages.length);
-    }, 3000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [isPaused]);
@@ -140,13 +140,13 @@ export default function Carousel() {
 
   return (
     <section
-      className="relative overflow-hidden h-50 sm:h-64 md:h-80 lg:h-[500px] xl:h-[600px]"
+      className="relative overflow-hidden h-screen"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       data-testid="carousel-section"
     >
       <div
-        className="flex transition-transform duration-500 h-full"
+        className="flex transition-transform duration-1000 h-full"
         style={{ transform: `translateX(-${currentSlide * 100}%)` }}
         data-testid="carousel-container"
       >
